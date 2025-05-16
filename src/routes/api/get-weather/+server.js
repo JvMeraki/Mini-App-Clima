@@ -6,7 +6,7 @@ const FETCH_OPTIONS = {
 	}
 };
 
-export async function get(event) {
+export async function GET(event) {
 	const { searchParams } = event.url;
 	const query = searchParams.get('q') ?? 'Bogotá';
 
@@ -36,8 +36,9 @@ export async function get(event) {
 		windDir: wind_dir
 	};
 
-	return {
-		status: 200,
-		body
-	};
+	return new Response(JSON.stringify(body), {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
 }
